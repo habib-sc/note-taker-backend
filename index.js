@@ -55,6 +55,18 @@ async function run () {
             res.send(result);
         });
 
+         // Update Note
+         app.patch('/todo/edit/:id', async (req, res) => {
+            const id = req.params.id;
+            const todo = req.body;
+            const filter = {_id: ObjectId(id)};
+            const updateDocument = {
+              $set: todo
+            };
+            const updatedItem = await todosCollection.updateOne(filter, updateDocument);
+            res.send(updatedItem);
+        });
+
     }
     finally{
 
